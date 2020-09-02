@@ -4,3 +4,19 @@ server:
 spring:
   application:
     name: dubbo-comsumer
+
+dubbo:
+  application:
+    name: dubbo-comsumer
+  registry:
+    address: zookeeper://192.168.56.105:2181
+    protocol: zookeeper
+    group: dubbo
+    check: true #注册中心不存在则启动时报错，false表示注册中心存在时自动重连
+  #消费者接口超时时间（单位毫秒）
+  consumer:
+    check: true #启动时检查服务提供放是否存在，不存在则阻止SpringIOC容器初始化，false表示调用远程服务时才检查服务方是否存在】
+    timeout: 3000
+#    retries: 3 #调用失败时的重试次数，不包含第一次调用（幂等操作[查询、删除、修改]可以设置重试次数，非幂等操作[新增]不要设置重试）
+  monitor:
+    protocol: registry

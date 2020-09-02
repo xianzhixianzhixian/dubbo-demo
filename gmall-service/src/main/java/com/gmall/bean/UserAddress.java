@@ -1,10 +1,12 @@
 package com.gmall.bean;
 
+import java.io.Serializable;
+
 /**
  * 用户收货地址类
  * @author xianzhixianzhixian on 20200901 17:23
  */
-public class UserAddress {
+public class UserAddress implements Serializable {
 
     private Integer id;
     private String userAddress; //用户地址

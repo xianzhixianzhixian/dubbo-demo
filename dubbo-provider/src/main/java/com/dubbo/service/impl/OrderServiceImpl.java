@@ -2,9 +2,11 @@ package com.dubbo.service.impl;
 
 import com.gmall.bean.UserAddress;
 import com.gmall.service.OrderService;
+import org.apache.dubbo.config.annotation.DubboReference;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,13 +22,19 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    /**
+     * 单独设置接口的Dubbo配置
+     * @param userId
+     * @return
+     */
+    @DubboReference(timeout = 1000)
     @Override
     public List<UserAddress> initOrder(String userId) {
         System.out.println("用户id：" + userId);
         //1、查询用户的收货地址
-//        List<UserAddress> addressList = userService.getUserAddressList(userId);
-//        return addressList;
-        return null;
+        UserAddress addressFirst = new UserAddress(1, "测试地址1", "1", "测试收件人1", "15995902970", "Y");
+        UserAddress addressSecond = new UserAddress(2, "测试地址2", "1", "测试收件人2", "15995902976", "N");
+        return Arrays.asList(addressFirst, addressSecond);
     }
 
 }

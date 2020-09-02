@@ -12,10 +12,18 @@ dubbo:
   #指定注册中心地址
   registry:
     address: zookeeper://192.168.56.105:2181
+    protocol: zookeeper
     timeout: 10000 #单位毫秒
+    group: dubbo
+    check: true #注册中心不存在则启动时报错，false表示注册中心存在时自动重连
+  #指定元数据存储地址
+  metadata-report:
+    address: zookeeper://192.168.56.105:2181
   #指定通信规则（协议、端口）
   protocol:
     name: dubbo
     port: 20880
-  consumer:
-    check: true
+  provider:
+    timeout: 3000
+  monitor:
+    protocol: registry
