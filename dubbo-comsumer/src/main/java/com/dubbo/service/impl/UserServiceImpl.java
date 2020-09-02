@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @DubboReference
+    @DubboReference(version = "1.0.0", timeout = 1000)
     private OrderService orderService;
 
     @Override

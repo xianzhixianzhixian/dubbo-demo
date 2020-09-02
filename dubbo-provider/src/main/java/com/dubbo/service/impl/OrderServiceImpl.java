@@ -11,23 +11,22 @@ import java.util.List;
 
 /**
  * 1、将服务提供者注册到注册中心
- *  a、导入dubbo依赖以及操作zookeeper的客户端
- *  b、配置服务提供者
+ * a、导入dubbo依赖以及操作zookeeper的客户端
+ * b、配置服务提供者
  * 2、让服务消费者去注测中心订阅服务提供者的服务地址
  *
  * @author xianzhixianzhixian on 20200901 22:18
  */
-
-@DubboService
+@DubboService(version = "1.0.0", timeout = 1000)
 @Service
 public class OrderServiceImpl implements OrderService {
 
     /**
      * 单独设置接口的Dubbo配置
+     *
      * @param userId
      * @return
      */
-    @DubboReference(timeout = 1000)
     @Override
     public List<UserAddress> initOrder(String userId) {
         System.out.println("用户id：" + userId);
