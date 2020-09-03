@@ -11,7 +11,10 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @DubboReference(version = "1.0.0", timeout = 1000)
+    /**
+     * Dubbo直连，不使用注册中心
+     */
+    @DubboReference(version = "1.0.0", timeout = 1000, url = "172.17.3.20:20880")
     private OrderService orderService;
 
     @DubboReference(version = "*", timeout = 1000, retries = 2, stub = "com.gmall.service.OrderServiceStub")
@@ -19,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserAddress> getUserAddressList(String userId) {
-        return orderServiceStub.initOrder(userId);
+        return orderService.initOrder(userId);
     }
 
 }
