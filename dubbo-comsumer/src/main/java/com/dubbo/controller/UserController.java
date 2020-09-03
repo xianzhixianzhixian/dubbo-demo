@@ -19,4 +19,9 @@ public class UserController {
         return userService.getUserAddressList(userId);
     }
 
+    @GetMapping("/getUserAddressListStub")
+    public List<UserAddress> getUserAddressListStub(String userId) {
+        return userService.getUserAddressList(userId);
+    }
+
 }
